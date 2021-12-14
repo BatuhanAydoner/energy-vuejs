@@ -25,11 +25,13 @@ const routes = [
     path: "/dashboard",
     name: "Home",
     component: Home,
+    meta: { requiresAuth: true },
   },
   {
     path: "/factory/:id",
     name: "Factory",
     component: FactoryDetail,
+    meta: { requiresAuth: true },
   },
 ];
 
