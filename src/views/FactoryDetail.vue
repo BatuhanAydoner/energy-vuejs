@@ -215,6 +215,7 @@ export default {
   name: "Home",
   data() {
     return {
+      factory_id: null,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -277,13 +278,14 @@ export default {
   },
 
   created() {
+    this.factory_id = this.$route.params.id;
     this.getDetails();
   },
   methods: {
     getDetails() {
       axios
         .post("http://localhost:3000/api/factory/detail/only", {
-          factory_id: 7,
+          factory_id: this.factory_id,
         })
         .then((res) => {
           this.details = [...res.data.data];
@@ -292,7 +294,7 @@ export default {
     newDetails() {
       axios
         .post("http://localhost:3000/api/factory/detail/add", {
-          factory_id: 7,
+          factory_id: this.factory_id,
           unit: this.addDetail.unit,
           start_date: this.addDetail.start_date,
           end_date: this.addDetail.end_date,
@@ -308,7 +310,7 @@ export default {
     updateDetail() {
       axios
         .post("http://localhost:3000/api/factory/detail/update", {
-          factory_id: 7,
+          factory_id: this.factory_id,
           factory_detail_id: this.addDetail.id,
           unit: this.addDetail.unit,
           start_date: this.formatDate(this.addDetail.start_date),
