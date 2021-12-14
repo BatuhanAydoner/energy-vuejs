@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isAuth: false,
     id: null,
     firstname: null,
     lastname: null,
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setAccountDetails(state, payload) {
+      state.isAuth = true;
       state.id = payload.id;
       state.firstname = payload.firstname;
       state.lastname = payload.lastname;

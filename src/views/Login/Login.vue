@@ -99,6 +99,7 @@ export default {
               const decoded = jwtDecode(res.data.token);
               this.$store.dispatch("setAccountDetails", { ...decoded });
 
+              localStorage.setItem("authenticated", res.data.token);
               this.$router.push({ name: "Home" });
             }
           })

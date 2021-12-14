@@ -2,14 +2,16 @@
   <v-container class="home">
     <v-data-table
       :headers="headers"
-      :items="factories"
+      :items="details"
       sort-by="calories"
       class="elevation-1"
       no-data-text="There is no any data."
       hide-default-footer
     >
-      <template v-slot:item.special="{ item }">
-        <span>{{ item ? "Special" : "Normal" }}</span>
+      <template v-slot:item.discount_price="{ item }">
+        <span>{{
+          item["discount_price"] === true ? "Discount" : "Without discount"
+        }}</span>
       </template>
 
       <template v-slot:item.start_date="{ item }">
@@ -22,18 +24,20 @@
 
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Factories</v-toolbar-title>
+          <v-toolbar-title>{{
+            details.length > 0 ? details[0].factory_name : "-"
+          }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New Factory
+                New Detail
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">Factory</span>
+                <span class="text-h5">Detail</span>
               </v-card-title>
 
               <v-card-text>
@@ -41,10 +45,10 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        label="Factory name"
+                        label="Unit"
                         type="text"
                         solo
-                        v-model="addFactory.factory_name"
+                        v-model="addDetail.unit"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -52,14 +56,14 @@
                         ref="menu_start"
                         v-model="menu_start"
                         :close-on-content-click="false"
-                        :return-value.sync="addFactory.start_date"
+                        :return-value.sync="addDetail.start_date"
                         transition="scale-transition"
                         offset-y
                         min-width="auto"
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            v-model="addFactory.start_date"
+                            v-model="addDetail.start_date"
                             label="Start Date"
                             prepend-icon="mdi-calendar"
                             readonly
@@ -68,7 +72,7 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          v-model="addFactory.start_date"
+                          v-model="addDetail.start_date"
                           no-title
                           scrollable
                         >
@@ -83,9 +87,7 @@
                           <v-btn
                             text
                             color="primary"
-                            @click="
-                              $refs.menu_start.save(addFactory.start_date)
-                            "
+                            @click="$refs.menu_start.save(addDetail.start_date)"
                           >
                             OK
                           </v-btn>
@@ -97,14 +99,14 @@
                         ref="menu_end"
                         v-model="menu_end"
                         :close-on-content-click="false"
-                        :return-value.sync="addFactory.end_date"
+                        :return-value.sync="addDetail.end_date"
                         transition="scale-transition"
                         offset-y
                         min-width="auto"
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            v-model="addFactory.end_date"
+                            v-model="addDetail.end_date"
                             label="End Date"
                             prepend-icon="mdi-calendar"
                             readonly
@@ -113,7 +115,7 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          v-model="addFactory.end_date"
+                          v-model="addDetail.end_date"
                           no-title
                           scrollable
                         >
@@ -124,7 +126,7 @@
                           <v-btn
                             text
                             color="primary"
-                            @click="$refs.menu_end.save(addFactory.end_date)"
+                            @click="$refs.menu_end.save(addDetail.end_date)"
                           >
                             OK
                           </v-btn>
@@ -133,19 +135,28 @@
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Employee Count"
+                        label="Usage (KW)"
                         type="number"
                         min="0"
                         solo
-                        hint="Employee count"
                         persistent-hint
-                        v-model="addFactory.count_employee"
+                        v-model="addDetail.usage"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="Pricing"
+                        type="number"
+                        min="0"
+                        solo
+                        persistent-hint
+                        v-model="addDetail.pricing"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-checkbox
-                        v-model="addFactory.special"
-                        label="Special"
+                        v-model="addDetail.discount_price"
+                        label="Discount"
                       ></v-checkbox>
                     </v-col>
                   </v-row>
@@ -164,7 +175,7 @@
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
-                >Are you sure you want to delete this factory?</v-card-title
+                >Are you sure you want to delete this detail?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -181,13 +192,6 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          medium
-          class="mr-2"
-          @click="$router.push({ name: 'Factory', params: { id: item.id } })"
-        >
-          mdi-play
-        </v-icon>
         <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
         <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
@@ -221,24 +225,29 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          text: "Name",
+          text: "Unit",
           align: "start",
           sortable: false,
-          value: "factory_name",
+          value: "unit",
         },
         { text: "Start Date", value: "start_date" },
         { text: "End Date", value: "end_date" },
-        { text: "Employee Count", value: "count_employee" },
+        { text: "Usage", value: "usage" },
         {
-          text: "Special",
-          value: "special",
+          text: "Pricing",
+          value: "pricing",
+        },
+        {
+          text: "Discount Price",
+          value: "discount_price",
         },
         { text: "Actions", value: "actions", sortable: false },
       ],
-      factories: [],
+      details: [],
       editedIndex: -1,
-      addFactory: {
-        factory_name: null,
+      addDetail: {
+        id: null,
+        unit: null,
         start_date: new Date(
           Date.now() - new Date().getTimezoneOffset() * 60000
         )
@@ -247,10 +256,11 @@ export default {
         end_date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
           .toISOString()
           .substr(0, 10),
-        count_employee: 0,
-        special: true,
+        usage: 0,
+        pricing: 0,
+        discount_price: false,
       },
-      selectedFactory: null,
+      selectedDetail: null,
 
       showModal: false,
       message: "",
@@ -267,47 +277,60 @@ export default {
   },
 
   created() {
-    this.getFactories();
+    this.getDetails();
   },
   methods: {
-    getFactories() {
+    getDetails() {
       axios
-        .post("http://localhost:3000/api/factory/all", {
-          user_id: "61b87ecfeaf51a649d590579",
+        .post("http://localhost:3000/api/factory/detail/only", {
+          factory_id: 7,
         })
         .then((res) => {
-          this.factories = [...res.data.data];
+          this.details = [...res.data.data];
         });
     },
-    newFactory() {
+    newDetails() {
       axios
-        .post("http://localhost:3000/api/factory/create-factory", {
-          user_id: "61b87ecfeaf51a649d590579",
-          factory_name: this.addFactory.factory_name,
-          start_date: this.addFactory.start_date,
-          end_date: this.addFactory.end_date,
-          count_employee: this.addFactory.count_employee,
-          special: this.addFactory.special,
+        .post("http://localhost:3000/api/factory/detail/add", {
+          factory_id: 7,
+          unit: this.addDetail.unit,
+          start_date: this.addDetail.start_date,
+          end_date: this.addDetail.end_date,
+          usage: parseInt(this.addDetail.usage),
+          pricing: parseFloat(this.addDetail.pricing),
+          discount_price: this.addDetail.discount_price,
         })
         .then(() => {
-          this.getFactories();
-          this.showDialog("Factory is added.");
+          this.getDetails();
+          this.showDialog("Factory detail is added.");
         });
     },
-    updateFactory() {
+    updateDetail() {
       axios
-        .post("http://localhost:3000/api/factory/update-factory", {
-          user_id: "61b87ecfeaf51a649d590579",
-          factory_id: this.addFactory.id,
-          factory_name: this.addFactory.factory_name,
-          start_date: this.formatDate(this.addFactory.start_date),
-          end_date: this.formatDate(this.addFactory.end_date),
-          count_employee: this.addFactory.count_employee,
-          special: this.addFactory.special,
+        .post("http://localhost:3000/api/factory/detail/update", {
+          factory_id: 7,
+          factory_detail_id: this.addDetail.id,
+          unit: this.addDetail.unit,
+          start_date: this.formatDate(this.addDetail.start_date),
+          end_date: this.formatDate(this.addDetail.end_date),
+          usage: parseInt(this.addDetail.usage),
+          pricing: parseFloat(this.addDetail.pricing),
+          discount_price: this.addDetail.discount_price,
         })
         .then(() => {
-          this.getFactories();
-          this.showDialog("Factory is updated.");
+          this.getDetails();
+          this.showDialog("Factory detail is updated.");
+        });
+    },
+    deleteDetail() {
+      axios
+        .post("http://localhost:3000/api/factory/detail/delete", {
+          factory_detail_id: parseInt(this.selectedDetail.id),
+        })
+        .then(() => {
+          this.getDetails();
+          this.showDialog("Factory detail is deleted.");
+          this.closeDelete();
         });
     },
     formatDate(date) {
@@ -316,24 +339,16 @@ export default {
     editItem(item) {
       this.edittedFactory = true;
       this.dialog = true;
-      this.addFactory = { ...item };
+      this.addDetail = { ...item };
     },
 
-    deleteItem(factory) {
+    deleteItem(detail) {
       this.dialogDelete = true;
-      this.selectedFactory = { ...factory };
+      this.selectedDetail = { ...detail };
     },
 
     deleteItemConfirm() {
-      axios
-        .post("http://localhost:3000/api/factory/delete-factory", {
-          factory_id: parseInt(this.selectedFactory.id),
-        })
-        .then(() => {
-          this.getFactories();
-          this.showDialog("Factory is deleted.");
-          this.dialogDelete = false;
-        });
+      this.deleteDetail();
     },
 
     showDialog(message) {
@@ -344,7 +359,7 @@ export default {
     close() {
       this.edittedFactory = false;
       this.dialog = false;
-      this.addFactory = {
+      this.addDetail = {
         factory_name: null,
         start_date: new Date(
           Date.now() - new Date().getTimezoneOffset() * 60000
@@ -361,14 +376,14 @@ export default {
 
     closeDelete() {
       this.dialogDelete = false;
-      this.selectedFactory = null;
+      this.selectedDetail = null;
     },
 
     save() {
       if (this.edittedFactory) {
-        this.updateFactory();
+        this.updateDetail();
       } else {
-        this.newFactory();
+        this.newDetails();
       }
       this.close();
       this.edittedFactory = false;

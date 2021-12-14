@@ -62,7 +62,7 @@
         </div>
         <div class="mt-3">
           <router-link
-            to="/"
+            to="/login"
             class="text-sm ml-2 hover:text-blue-500 cursor-pointer"
             >Do you have an account? Login.
           </router-link>
@@ -131,23 +131,23 @@ export default {
             password: this.password,
             authority: this.authority ? 1 : 2,
           })
-          .then(res => {
-              if (res.status === 200) {
-                this.errorMessage = "Register is successful.";
-                this.showModal = true;
-              }
-              setTimeout(() => {
-                  this.$router.push({ name: "Login" })
-              }, 1500);
-              
-          }).catch(res => {
-              if (res.response.data.message === "User already exists.") {
-                  this.errorMessage = "User already exists.";
-                  this.showModal = true;
-              }else {
-                  this.errorMessage = "Register is unsuccessful.";
-                  this.showModal = true;
-              }
+          .then((res) => {
+            if (res.status === 200) {
+              this.errorMessage = "Register is successful.";
+              this.showModal = true;
+            }
+            setTimeout(() => {
+              this.$router.push({ name: "Login" });
+            }, 1500);
+          })
+          .catch((res) => {
+            if (res.response.data.message === "User already exists.") {
+              this.errorMessage = "User already exists.";
+              this.showModal = true;
+            } else {
+              this.errorMessage = "Register is unsuccessful.";
+              this.showModal = true;
+            }
           });
       }
     },
