@@ -273,7 +273,7 @@ export default {
     getFactories() {
       axios
         .post("http://localhost:3000/api/factory/all", {
-          user_id: "61b87ecfeaf51a649d590579",
+          user_id: this.$store.getters.accountDetail.id,
         })
         .then((res) => {
           this.factories = [...res.data.data];
