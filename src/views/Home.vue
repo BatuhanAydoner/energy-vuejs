@@ -281,7 +281,7 @@ export default {
   methods: {
     getFactories() {
       axios
-        .post("energy-nodejs.vercel.app/api/factory/all", {
+        .post("https://energy-vuejs.vercel.app/api/factory/all", {
           user_id: this.$store.getters.accountDetail.id,
         })
         .then((res) => {
@@ -290,7 +290,7 @@ export default {
     },
     newFactory() {
       axios
-        .post("energy-nodejs.vercel.app/api/factory/create-factory", {
+        .post("https://energy-vuejs.vercel.app/api/factory/create-factory", {
           user_id: this.$store.getters.accountDetail.id,
           factory_name: this.addFactory.factory_name,
           start_date: this.addFactory.start_date,
@@ -305,7 +305,7 @@ export default {
     },
     updateFactory() {
       axios
-        .post("energy-nodejs.vercel.app/api/factory/update-factory", {
+        .post("https://energy-vuejs.vercel.app/api/factory/update-factory", {
           user_id: "61b87ecfeaf51a649d590579",
           factory_id: this.addFactory.id,
           factory_name: this.addFactory.factory_name,
@@ -335,7 +335,7 @@ export default {
 
     deleteItemConfirm() {
       axios
-        .post("energy-nodejs.vercel.app/api/factory/delete-factory", {
+        .post("https://energy-vuejs.vercel.app/api/factory/delete-factory", {
           factory_id: parseInt(this.selectedFactory.id),
         })
         .then(() => {
