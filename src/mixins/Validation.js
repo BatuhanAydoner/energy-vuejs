@@ -16,9 +16,16 @@ export default {
         }
       });
 
+      const language = localStorage.getItem("lang");
+
+      const errorMessage =
+        language === "tr"
+          ? " alanlarını beklenilen formda doldurunuz."
+          : " fill these fields as expected.";
+
       return {
         error: error.length > 0,
-        message: error + " alanlarını beklenilen formda doldurunuz.",
+        message: error + errorMessage,
       };
     },
 
