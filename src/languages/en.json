@@ -1,3 +1,77 @@
 {
-    "welcome": "Welcome!"
+    "general": {
+        "welcome": "Welcome!",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "email": "Email",
+        "password": "Pssword"
+    },
+    "login": {
+        "buttonTitle": "Login",
+        "noAccount": "You don't have an account? Sign up."
+    },
+    "register": {
+        "passwordHint": "At least 1 uppercase, 1 lowercase, 1 number and 8 characters.",
+        "buttonTitle": "Register",
+        "existsAccount": "Yoy have an account? Login."
+    },
+    "dashboard": {
+        "factories": "Factories",
+        "factory": "Factory",
+        "newFactory": "New Factory",
+        "table": {
+            "name": "Name",
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "count_employee": "Employee Count",
+            "special": "Special",
+            "actions": "Actions",
+            "noData": "There is no any data."
+        },
+        "editDialog": {
+            "factory_name": "Factory Nasme",
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "count_employee": "Employee Count",
+            "special": "Special",
+            "confirmButtonTitle": "Save",
+            "cancelButtonTitle": "Cancel",
+            "calendarConfirm": "Ok"
+        },
+        "deleteDialog": {
+            "title": "Are you sure to delete factory?",
+            "confirmButtonTitle": "Delete",
+            "cancelButtonTitle": "Cancel"
+        }
+    },
+    "details": {
+        "detail": "Detail",
+        "newDetail": "New Detail",
+        "table": {
+            "unit": "Unit",
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "usage": "Usage(KW)",
+            "pricing": "Pricing",
+            "discount_price": "Discount Price",
+            "actions": "Actions",
+            "noData": "There is no any data."
+        },
+        "editDialog": {
+            "unit": "Unit",
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "usageHint": "Usage(KW)",
+            "pricingHint": "Pricing",
+            "discount": "Discount",
+            "confirmButtonTitle": "Save",
+            "cancelButtonTitle": "Cancel",
+            "calendarConfirm": "Ok"
+        },
+        "deleteDialog": {
+            "title": "Are you sure to delete factory detail?",
+            "confirmButtonTitle": "Delete",
+            "cancelButtonTitle": "Cancel"
+        }
+    }
 }

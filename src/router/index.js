@@ -10,6 +10,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "Login",
+    component: Login,
+    meta: { requiresUnauth: true },
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,

@@ -1,3 +1,77 @@
 {
-    "welcome": "Hoşgeldiniz!"
+    "general": {
+        "welcome": "Hoşgeldiniz!",
+        "firstname": "Ad",
+        "lastname": "Soyad",
+        "email": "Email",
+        "password": "Şifre"
+    },
+    "login": {
+        "buttonTitle": "Giriş Yap",
+        "noAccount": "Hesabınız yok mu? Kaydol."
+    },
+    "register": {
+        "passwordHint": "En az 1 tane büyük, küçük harf, 1 rakam ve 8 karakter.",
+        "buttonTitle": "Kaydol",
+        "existsAccount": "Hesabınız var mı? Giriş yap."
+    },
+    "dashboard": {
+        "factories": "Fabrikalar",
+        "factory": "Fabrika",
+        "newFactory": "Yeni Fabrika",
+        "table": {
+            "name": "İsim",
+            "start_date": "Başlangıç Tarihi",
+            "end_date": "Bitiş Tarihi",
+            "count_employee": "Çalışan Sayısı",
+            "special": "Özel",
+            "actions": "Seçenekler",
+            "noData": "Herhangi bir veri bulunamadı."
+        },
+        "editDialog": {
+            "factory_name": "Fabrika Adı",
+            "start_date": "Başlangıç Tarihi",
+            "end_date": "Bitiş Tarihi",
+            "count_employee": "Çalışan Sayısı",
+            "special": "Özel",
+            "confirmButtonTitle": "Kaydet",
+            "cancelButtonTitle": "İptal",
+            "calendarConfirm": "Tamam"
+        },
+        "deleteDialog": {
+            "title": "Fabrikayı silmek istediğinize emin misiniz?",
+            "confirmButtonTitle": "Sil",
+            "cancelButtonTitle": "İptal"
+        }
+    },
+    "details": {
+        "factory": "Fabrika",
+        "newDetail": "Yeni Detay",
+        "table": {
+            "unit": "Birim",
+            "start_date": "Başlangıç Tarihi",
+            "end_date": "Bitiş Tarihi",
+            "usage": "Kullanım(KW)",
+            "pricing": "Tutar",
+            "discount_price": "İndirimli Fiyat",
+            "actions": "Seçenekler",
+            "noData": "Herhangi bir veri bulunamadı."
+        },
+        "editDialog": {
+            "unit": "Birim",
+            "start_date": "Başlangıç Tarihi",
+            "end_date": "Bitiş Tarihi",
+            "usageHint": "Kullanım(KW)",
+            "pricingHint": "Tutar",
+            "discount": "İndirimli",
+            "confirmButtonTitle": "Kaydet",
+            "cancelButtonTitle": "İptal",
+            "calendarConfirm": "Tamam"
+        },
+        "deleteDialog": {
+            "title": "Fabrika detayını silmek istediğinize emin misiniz?",
+            "confirmButtonTitle": "Sil",
+            "cancelButtonTitle": "İptal"
+        }
+    }
 }

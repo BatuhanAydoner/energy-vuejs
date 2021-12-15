@@ -22,29 +22,31 @@
     </div>
     <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
       <form class="bg-white">
-        <h1 class="text-gray-800 font-bold text-2xl mb-3">Welcome!</h1>
+        <h1 class="text-gray-800 font-bold text-2xl mb-3">
+          {{ $t("general.welcome") }}
+        </h1>
         <v-text-field
-          label="Firstname"
+          :label="$t('general.firstname')"
           type="text"
           solo
           v-model="firstname"
         ></v-text-field>
         <v-text-field
-          label="Lastname"
+          :label="$t('general.lastname')"
           type="text"
           solo
           v-model="lastname"
         ></v-text-field>
         <v-text-field
-          label="Email"
+          :label="$t('general.email')"
           type="email"
           solo
           v-model="email"
         ></v-text-field>
         <v-text-field
-          label="Password"
+          :label="$t('general.passwword')"
           type="password"
-          hint="At lease 1 uppercase, 1 lowercase, 1 number and 8 characters."
+          :hint="$t('register.passwordHint')"
           persistent-hint
           solo
           v-model="password"
@@ -58,13 +60,15 @@
           solo
         ></v-select>
         <div>
-          <v-btn block large @click="register"> Register </v-btn>
+          <v-btn block large @click="register">
+            {{ $t("register.buttonTitle") }}
+          </v-btn>
         </div>
         <div class="mt-3">
           <router-link
             to="/login"
             class="text-sm ml-2 hover:text-blue-500 cursor-pointer"
-            >Do you have an account? Login.
+            >{{ $t("register.existsAccount") }}
           </router-link>
         </div>
       </form>

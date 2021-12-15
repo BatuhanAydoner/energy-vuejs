@@ -23,28 +23,30 @@
     <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
       <form class="bg-white">
         <h1 class="text-gray-800 font-bold text-2xl mb-3">
-          {{ $t("welcome") }}
+          {{ $t("general.welcome") }}
         </h1>
         <v-text-field
-          label="Email"
+          :label="$t('general.email')"
           type="email"
           solo
           v-model="email"
         ></v-text-field>
         <v-text-field
-          label="Password"
+          :label="$t('general.password')"
           type="password"
           solo
           v-model="password"
         ></v-text-field>
         <div>
-          <v-btn block large @click="login"> Login </v-btn>
+          <v-btn block large @click="login">
+            {{ $t("login.buttonTitle") }}
+          </v-btn>
         </div>
         <div class="mt-3">
           <router-link
             :to="{ name: 'Register' }"
             class="text-sm ml-2 hover:text-blue-500 cursor-pointer"
-            >You don't have an account? Sign up.
+            >{{ $t("login.noAccount") }}
           </router-link>
         </div>
       </form>

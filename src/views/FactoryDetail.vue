@@ -5,7 +5,7 @@
       :items="details"
       sort-by="calories"
       class="elevation-1"
-      no-data-text="There is no any data."
+      :no-data-text="$t('details.table.noData')"
       hide-default-footer
     >
       <template v-slot:item.discount_price="{ item }">
@@ -32,12 +32,12 @@
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New Detail
+                {{ $t("details.newDetail") }}
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">Detail</span>
+                <span class="text-h5">{{ $t("details.detail") }}</span>
               </v-card-title>
 
               <v-card-text>
@@ -45,7 +45,7 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        label="Unit"
+                        :label="$t('details.editDialog.unit')"
                         type="text"
                         solo
                         v-model="addDetail.unit"
@@ -64,7 +64,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="addDetail.start_date"
-                            label="Start Date"
+                            :label="$t('details.editDialog.start_date')"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -82,14 +82,14 @@
                             color="primary"
                             @click="menu_start = false"
                           >
-                            Cancel
+                            {{ $t("details.editDialog.cancelButtonTitle") }}
                           </v-btn>
                           <v-btn
                             text
                             color="primary"
                             @click="$refs.menu_start.save(addDetail.start_date)"
                           >
-                            OK
+                            {{ $t("details.editDialog.calendarConfirm") }}
                           </v-btn>
                         </v-date-picker>
                       </v-menu>
@@ -107,7 +107,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="addDetail.end_date"
-                            label="End Date"
+                            :label="$t('details.editDialog.end_date')"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -121,34 +121,36 @@
                         >
                           <v-spacer></v-spacer>
                           <v-btn text color="primary" @click="menu_end = false">
-                            Cancel
+                            {{ $t("details.editDialog.cancelButtonTitle") }}
                           </v-btn>
                           <v-btn
                             text
                             color="primary"
                             @click="$refs.menu_end.save(addDetail.end_date)"
                           >
-                            OK
+                            {{ $t("details.editDialog.calendarConfirm") }}
                           </v-btn>
                         </v-date-picker>
                       </v-menu>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Usage (KW)"
+                        :label="$t('details.editDialog.usageHint')"
                         type="number"
                         min="0"
                         solo
+                        :hint="$t('details.editDialog.usageHint')"
                         persistent-hint
                         v-model="addDetail.usage"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Pricing"
+                        :label="$t('details.editDialog.pricingHint')"
                         type="number"
                         min="0"
                         solo
+                        :hint="$t('details.editDialog.pricingHint')"
                         persistent-hint
                         v-model="addDetail.pricing"
                       ></v-text-field>
@@ -156,7 +158,7 @@
                     <v-col cols="12">
                       <v-checkbox
                         v-model="addDetail.discount_price"
-                        label="Discount"
+                        :label="$t('details.editDialog.discount')"
                       ></v-checkbox>
                     </v-col>
                   </v-row>
@@ -166,7 +168,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                  {{ $t("details.deleteDialog.cancelButtonTitle") }}
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
               </v-card-actions>
@@ -174,17 +176,17 @@
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this detail?</v-card-title
-              >
+              <v-card-title class="text-h5">{{
+                $t("details.deleteDialog.title")
+              }}</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
+                <v-btn color="blue darken-1" text @click="closeDelete">{{
+                  $t("details.deleteDialog.cancelButtonTitle")
+                }}</v-btn>
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{
+                  $t("details.deleteDialog.confirmButtonTitle")
+                }}</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>

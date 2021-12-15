@@ -5,8 +5,8 @@ import { en, tr } from "../languages/index";
 Vue.use(VueI18n);
 
 const messages = {
-  tr,
   en,
+  tr,
 };
 
 if (!localStorage.getItem("lang")) {
@@ -15,7 +15,7 @@ if (!localStorage.getItem("lang")) {
   });
   browserLang
     ? localStorage.setItem("lang", browserLang)
-    : localStorage.setItem("lang", "tr");
+    : localStorage.setItem("lang", "en");
 }
 
 const i18n = new VueI18n({

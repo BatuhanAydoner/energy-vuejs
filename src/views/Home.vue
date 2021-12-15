@@ -5,7 +5,7 @@
       :items="factories"
       sort-by="calories"
       class="elevation-1"
-      no-data-text="There is no any data."
+      :no-data-text="$t('factories.table.noData')"
       hide-default-footer
     >
       <template v-slot:item.special="{ item }">
@@ -22,18 +22,18 @@
 
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Factories</v-toolbar-title>
+          <v-toolbar-title>{{ $t("dashboard.factories") }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New Factory
+                {{ $t("dashboard.newFactory") }}
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">Factory</span>
+                <span class="text-h5">{{ $t("dashboard.factory") }}</span>
               </v-card-title>
 
               <v-card-text>
@@ -41,7 +41,7 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        label="Factory name"
+                        :label="$t('dashboard.editDialog.factory_name')"
                         type="text"
                         solo
                         v-model="addFactory.factory_name"
@@ -60,7 +60,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="addFactory.start_date"
-                            label="Start Date"
+                            :label="$t('dashboard.editDialog.start_date')"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -78,7 +78,7 @@
                             color="primary"
                             @click="menu_start = false"
                           >
-                            Cancel
+                            {{ $t("dashboard.editDialog.cancelButtonTitle") }}
                           </v-btn>
                           <v-btn
                             text
@@ -87,7 +87,7 @@
                               $refs.menu_start.save(addFactory.start_date)
                             "
                           >
-                            OK
+                            {{ $t("dashboard.editDialog.calendarConfirm") }}
                           </v-btn>
                         </v-date-picker>
                       </v-menu>
@@ -105,7 +105,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="addFactory.end_date"
-                            label="End Date"
+                            :label="$t('dashboard.editDialog.end_date')"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -119,25 +119,25 @@
                         >
                           <v-spacer></v-spacer>
                           <v-btn text color="primary" @click="menu_end = false">
-                            Cancel
+                            {{ $t("dashboard.editDialog.cancelButtonTitle") }}
                           </v-btn>
                           <v-btn
                             text
                             color="primary"
                             @click="$refs.menu_end.save(addFactory.end_date)"
                           >
-                            OK
+                            {{ $t("dashboard.editDialog.calendarConfirm") }}
                           </v-btn>
                         </v-date-picker>
                       </v-menu>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        label="Employee Count"
+                        :label="$t('dashboard.editDialog.count_employee')"
                         type="number"
                         min="0"
                         solo
-                        hint="Employee count"
+                        :hint="$t('dashboard.editDialog.count_employee')"
                         persistent-hint
                         v-model="addFactory.count_employee"
                       ></v-text-field>
@@ -145,7 +145,7 @@
                     <v-col cols="12">
                       <v-checkbox
                         v-model="addFactory.special"
-                        label="Special"
+                        :label="$t('dashboard.editDialog.special')"
                       ></v-checkbox>
                     </v-col>
                   </v-row>
@@ -155,25 +155,27 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                  {{ $t("dashboard.editDialog.cancelButtonTitle") }}
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                <v-btn color="blue darken-1" text @click="save">
+                  {{ $t("dashboard.editDialog.confirmButtonTitle") }}
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this factory?</v-card-title
-              >
+              <v-card-title class="text-h5">{{
+                $t("dashboard.deleteDialog.title")
+              }}</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
+                <v-btn color="blue darken-1" text @click="closeDelete">{{
+                  $t("dashboard.deleteDialog.cancelButtonTitle")
+                }}</v-btn>
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm">{{
+                  $t("dashboard.deleteDialog.confirmButtonTitle")
+                }}</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -221,19 +223,26 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          text: "Name",
+          text: this.$t("dashboard.table.name"),
           align: "start",
           sortable: false,
           value: "factory_name",
         },
-        { text: "Start Date", value: "start_date" },
-        { text: "End Date", value: "end_date" },
-        { text: "Employee Count", value: "count_employee" },
+        { text: this.$t("dashboard.table.start_date"), value: "start_date" },
+        { text: this.$t("dashboard.table.end_date"), value: "end_date" },
         {
-          text: "Special",
+          text: this.$t("dashboard.table.count_employee"),
+          value: "count_employee",
+        },
+        {
+          text: this.$t("dashboard.table.special"),
           value: "special",
         },
-        { text: "Actions", value: "actions", sortable: false },
+        {
+          text: this.$t("dashboard.table.actions"),
+          value: "actions",
+          sortable: false,
+        },
       ],
       factories: [],
       editedIndex: -1,
