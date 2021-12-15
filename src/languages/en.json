@@ -14,12 +14,17 @@
     "register": {
         "passwordHint": "At least 1 uppercase, 1 lowercase, 1 number and 8 characters.",
         "buttonTitle": "Register",
-        "existsAccount": "Yoy have an account? Login."
+        "existsAccount": "Yoy have an account? Login.",
+        "successMessage": "Register is successful.",
+        "errorMessage": "Register is unsuccessful."
     },
     "dashboard": {
         "factories": "Factories",
         "factory": "Factory",
         "newFactory": "New Factory",
+        "addFactory": "Factory is added.",
+        "updateFactory": "Factory is updated.",
+        "deleteFactory": "Factory is deleted.",
         "table": {
             "name": "Name",
             "start_date": "Start Date",
@@ -48,6 +53,9 @@
     "details": {
         "detail": "Detail",
         "newDetail": "New Detail",
+        "addDetail": "Factory detail is added.",
+        "updateDetail": "Factory detail is updated.",
+        "deleteDetail": "Factory detail is deleted.",
         "table": {
             "unit": "Unit",
             "start_date": "Start Date",

@@ -137,7 +137,7 @@ export default {
           })
           .then((res) => {
             if (res.status === 200) {
-              this.errorMessage = "Register is successful.";
+              this.errorMessage = this.$t("register.successMessage");
               this.showModal = true;
             }
             setTimeout(() => {
@@ -149,7 +149,7 @@ export default {
               this.errorMessage = "User already exists.";
               this.showModal = true;
             } else {
-              this.errorMessage = "Register is unsuccessful.";
+              this.errorMessage = this.$t("register.errorMessage");
               this.showModal = true;
             }
           });

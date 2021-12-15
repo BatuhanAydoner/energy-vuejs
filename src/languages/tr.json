@@ -14,12 +14,17 @@
     "register": {
         "passwordHint": "En az 1 tane büyük, küçük harf, 1 rakam ve 8 karakter.",
         "buttonTitle": "Kaydol",
-        "existsAccount": "Hesabınız var mı? Giriş yap."
+        "existsAccount": "Hesabınız var mı? Giriş yap.",
+        "successMessage": "Kayıt işlemi başarılı oldu. Login sayfasına yönlendiriliyorunuz.",
+        "errorMessage": "Kayıt işlemi başarısız oldu."
     },
     "dashboard": {
         "factories": "Fabrikalar",
         "factory": "Fabrika",
         "newFactory": "Yeni Fabrika",
+        "addFactory": "Fabrika eklendi.",
+        "updateFactory": "Fabrika güncellendi.",
+        "deleteFactory": "Fabrika silindi.",
         "table": {
             "name": "İsim",
             "start_date": "Başlangıç Tarihi",
@@ -48,6 +53,9 @@
     "details": {
         "factory": "Fabrika",
         "newDetail": "Yeni Detay",
+        "addDetail": "Detay eklendi.",
+        "updateDetail": "Detay güncellendi.",
+        "deleteDeail": "Detay silindi.",
         "table": {
             "unit": "Birim",
             "start_date": "Başlangıç Tarihi",

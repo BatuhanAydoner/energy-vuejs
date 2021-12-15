@@ -310,7 +310,7 @@ export default {
         })
         .then(() => {
           this.getDetails();
-          this.showDialog("Factory detail is added.");
+          this.showDialog(this.$t("details.addDetail"));
         });
     },
     updateDetail() {
@@ -327,7 +327,7 @@ export default {
         })
         .then(() => {
           this.getDetails();
-          this.showDialog("Factory detail is updated.");
+          this.showDialog(this.$t("details.updateDetail"));
         });
     },
     deleteDetail() {
@@ -337,7 +337,7 @@ export default {
         })
         .then(() => {
           this.getDetails();
-          this.showDialog("Factory detail is deleted.");
+          this.showDialog(this.$t("details.deletDetail"));
           this.closeDelete();
         });
     },

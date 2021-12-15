@@ -300,7 +300,7 @@ export default {
         })
         .then(() => {
           this.getFactories();
-          this.showDialog("Factory is added.");
+          this.showDialog(this.$t("dashboard.addFactory"));
         });
     },
     updateFactory() {
@@ -316,7 +316,7 @@ export default {
         })
         .then(() => {
           this.getFactories();
-          this.showDialog("Factory is updated.");
+          this.showDialog(this.$t("dashboard.updateFactory"));
         });
     },
     formatDate(date) {
@@ -340,7 +340,7 @@ export default {
         })
         .then(() => {
           this.getFactories();
-          this.showDialog("Factory is deleted.");
+          this.showDialog(this.$t("dashboard.deleteFactory"));
           this.dialogDelete = false;
         });
     },
