@@ -4,7 +4,8 @@
         "firstname": "Ad",
         "lastname": "Soyad",
         "email": "Email",
-        "password": "Şifre"
+        "password": "Şifre",
+        "logout": "Çıkış Yap"
     },
     "login": {
         "buttonTitle": "Giriş Yap",

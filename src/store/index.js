@@ -28,6 +28,10 @@ export default new Vuex.Store({
       state.email = payload.email;
       state.authority = payload.authority;
     },
+    logout(state) {
+      state.isAuth = false;
+      localStorage.removeItem("authenticated");
+    },
   },
   actions: {
     setAccountDetails(context, data) {

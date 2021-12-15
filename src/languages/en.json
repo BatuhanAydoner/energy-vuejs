@@ -4,7 +4,8 @@
         "firstname": "Firstname",
         "lastname": "Lastname",
         "email": "Email",
-        "password": "Pssword"
+        "password": "Pssword",
+        "logout": "Logout"
     },
     "login": {
         "buttonTitle": "Login",

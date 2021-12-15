@@ -228,23 +228,27 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          text: "Unit",
+          text: this.$t("details.table.unit"),
           align: "start",
           sortable: false,
           value: "unit",
         },
-        { text: "Start Date", value: "start_date" },
-        { text: "End Date", value: "end_date" },
+        { text: this.$t("details.table.start_date"), value: "start_date" },
+        { text: this.$t("details.table.end_date"), value: "end_date" },
         { text: "Usage", value: "usage" },
         {
-          text: "Pricing",
+          text: this.$t("details.table.pricing"),
           value: "pricing",
         },
         {
-          text: "Discount Price",
+          text: this.$t("details.table.discount_price"),
           value: "discount_price",
         },
-        { text: "Actions", value: "actions", sortable: false },
+        {
+          text: this.$t("details.table.actions"),
+          value: "actions",
+          sortable: false,
+        },
       ],
       details: [],
       editedIndex: -1,
