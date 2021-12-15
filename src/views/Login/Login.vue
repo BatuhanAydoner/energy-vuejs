@@ -92,7 +92,7 @@ export default {
         this.showModal = true;
       } else {
         axios
-          .post("https://energy-vuejs.vercel.app/api/user/login", {
+          .post("https://energy-nodejs.vercel.app/api/user/login", {
             email: this.email,
             password: this.password,
           })
