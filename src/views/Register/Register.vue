@@ -128,7 +128,7 @@ export default {
         this.showModal = true;
       } else {
         axios
-          .post("http://localhost:3000/api/user/register", {
+          .post("energy-nodejs.vercel.app/api/user/register", {
             firstname: this.firstname,
             lastname: this.lastname,
             email: this.email,

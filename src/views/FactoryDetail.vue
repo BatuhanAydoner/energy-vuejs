@@ -290,7 +290,7 @@ export default {
   methods: {
     getDetails() {
       axios
-        .post("http://localhost:3000/api/factory/detail/only", {
+        .post("energy-nodejs.vercel.app/api/factory/detail/only", {
           factory_id: this.factory_id,
         })
         .then((res) => {
@@ -299,7 +299,7 @@ export default {
     },
     newDetails() {
       axios
-        .post("http://localhost:3000/api/factory/detail/add", {
+        .post("energy-nodejs.vercel.app/api/factory/detail/add", {
           factory_id: this.factory_id,
           unit: this.addDetail.unit,
           start_date: this.addDetail.start_date,
@@ -315,7 +315,7 @@ export default {
     },
     updateDetail() {
       axios
-        .post("http://localhost:3000/api/factory/detail/update", {
+        .post("energy-nodejs.vercel.app/api/factory/detail/update", {
           factory_id: this.factory_id,
           factory_detail_id: this.addDetail.id,
           unit: this.addDetail.unit,
@@ -332,7 +332,7 @@ export default {
     },
     deleteDetail() {
       axios
-        .post("http://localhost:3000/api/factory/detail/delete", {
+        .post("energy-nodejs.vercel.app/api/factory/detail/delete", {
           factory_detail_id: parseInt(this.selectedDetail.id),
         })
         .then(() => {

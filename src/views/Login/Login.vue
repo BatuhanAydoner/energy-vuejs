@@ -92,7 +92,7 @@ export default {
         this.showModal = true;
       } else {
         axios
-          .post("http://localhost:3000/api/user/login", {
+          .post("energy-nodejs.vercel.app/api/user/login", {
             email: this.email,
             password: this.password,
           })
