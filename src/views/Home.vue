@@ -291,7 +291,7 @@ export default {
     newFactory() {
       axios
         .post("http://localhost:3000/api/factory/create-factory", {
-          user_id: "61b87ecfeaf51a649d590579",
+          user_id: this.$store.getters.accountDetail.id,
           factory_name: this.addFactory.factory_name,
           start_date: this.addFactory.start_date,
           end_date: this.addFactory.end_date,
